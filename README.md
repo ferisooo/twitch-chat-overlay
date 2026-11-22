@@ -2,7 +2,7 @@
 
 A small always-on-top chat window for streamers on Windows. It shows Twitch and TikTok LIVE chat in one see-through overlay you can keep over your game, and it gives OBS its own chat page to put on stream.
 
-> **Version 2.** A full rebuild. Coming from version 1? See [Install](#install).
+> **Version 2.** A full rebuild.
 
 - **Twitch, TikTok and Merge tabs.** Merge shows both chats together, with a colored bar marking where each message came from.
 - **Truly see-through.** The window has real transparency, so there is no color-key trick and no flicker.
@@ -34,8 +34,6 @@ A small always-on-top chat window for streamers on Windows. It shows Twitch and 
 3. Double-click **`start.bat`**. If something is missing, it runs the installer for you first.
 
 On first start the ⚙ settings panel is open. Type your Twitch channel on the Twitch tab and press **Connect**. Do the same with your TikTok username on the TikTok tab.
-
-**Coming from version 1?** Double-click `update.bat` in your old overlay folder, then `start.bat`. Your channels, nicknames, name colors and Twitch login come over by themselves.
 
 ## OBS setup
 

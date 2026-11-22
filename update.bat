@@ -4,21 +4,13 @@ rem Updates this folder to the newest version.
 rem Double-click it any time. It works no matter which folder it was started from.
 set "BRANCH=main"
 
-rem git may replace this very file while it runs, which confuses Windows.
+rem Updating may replace this very file while it runs, which confuses Windows.
 rem So run a copy from the temp folder instead.
 if /i "%~1"=="--run" goto :start
 copy /y "%~f0" "%TEMP%\live-chat-overlay-update.bat" >nul 2>&1
 if errorlevel 1 goto :start
 "%TEMP%\live-chat-overlay-update.bat" --run "%~dp0."
-
-goto :start
-
-rem The old version 1 updater keeps reading this file after git replaces it,
-rem from the byte where its own lines ended. The lines below catch it there.
-rem ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-goto :from_v1
-rem -----------------------------------------------------------------------------------------------------------------------------------------------
-goto :from_v1
+exit /b
 
 :start
 if /i "%~1"=="--run" (cd /d "%~2") else (cd /d "%~dp0.")
@@ -135,17 +127,6 @@ echo Update failed.
 pause
 exit /b 1
 
-:from_v1
-rem Only the old version 1 updater gets here, and only after git pull worked.
-if "!STASHED!"=="1" git stash pop
-echo.
-echo Updated to version 2!
-echo Double-click start.bat to start the overlay. The first start installs what it needs.
-if "!WAS_RUNNING!"=="1" if exist "start.bat" start "" "start.bat"
-echo.
-pause
-exit /b 0
-
 :close_overlay
 rem Close the overlay if it is running (Windows locks files it is using).
 set "WAS_RUNNING=0"
@@ -158,7 +139,7 @@ if exist "%PIDFILE%" (
     taskkill /F /T /PID !OPID! >nul 2>&1
   )
 )
-rem The old version is found by its window title instead.
+rem Also look for its window by title, in case the pid file is missing.
 tasklist /FI "WINDOWTITLE eq Live Chat Overlay" /NH 2>nul | find /I "python" >nul
 if not errorlevel 1 (
   set "WAS_RUNNING=1"
