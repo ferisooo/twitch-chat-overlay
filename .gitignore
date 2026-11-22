@@ -1,0 +1,16 @@
+# Your own settings from the old version (the new one keeps them in %APPDATA%).
+settings.json
+
+# Downloaded at runtime by the old version
+emote_cache/
+
+# Python build output and test caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local backups and logs
+main_backup.py
+main_before_*.py
+*.part
+*.log

@@ -1,0 +1,3 @@
+# Only for TikTok chat. overlay/sources/tiktok.py patches TikTokLive 6.6
+# internals; 7.x changes them, so stay on 6.x.
+TikTokLive>=6.6.0,<7

@@ -1,0 +1,2 @@
+# The overlay window. Everyone needs this.
+PySide6-Essentials>=6.8

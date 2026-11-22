@@ -1,0 +1,97 @@
+:root {
+  --text: #f4f4f6;
+  --muted: #b9b9c4;
+  --box: rgba(14, 14, 16, 0.86);
+  --twitch: #9146ff;
+  --tiktok: #fe2c55;
+  --event: #c9a6ff;
+  --points: #ffd56b;
+  --warn: #ffb347;
+  --error: #ff6b6b;
+  --mention: rgba(88, 40, 170, 0.9);
+  --size: 15px;
+  --emote: calc(var(--size) * 1.75);
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  color: var(--text);
+  font: 600 var(--size) / 1.45 "Segoe UI", "Inter", "Noto Sans", system-ui, sans-serif,
+    "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji";
+}
+
+#chat {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  overflow: hidden;
+  transition: opacity 0.6s ease;
+}
+
+#chat.hidden { opacity: 0; }
+
+.line {
+  overflow-wrap: anywhere;
+  animation: pop-in 0.22s ease-out;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Each message gets a rounded dark box so it reads over bright games. */
+.box {
+  padding: 2px 8px;
+  border-radius: 7px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+body.boxes .box { background: var(--box); }
+
+body:not(.boxes) .line {
+  text-shadow: 0 0 2px #000, 0 1px 3px #000, 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.bar {
+  display: inline-block;
+  width: 3px;
+  height: 0.95em;
+  margin-right: 6px;
+  border-radius: 2px;
+  vertical-align: -0.1em;
+}
+.p-twitch .bar { background: var(--twitch); }
+.p-tiktok .bar { background: var(--tiktok); }
+
+.name { font-weight: 700; }
+.body { font-weight: 500; }
+.k-action .body { font-style: italic; }
+
+.emote {
+  height: var(--emote);
+  max-width: calc(var(--emote) * 4);
+  vertical-align: middle;
+  margin: -4px 1px;
+}
+
+.mention-word { font-weight: 800; color: #fff; }
+.line.mention .box { background: var(--mention); }
+body:not(.boxes) .line.mention .box { background: var(--mention); }
+
+.k-event .box { color: var(--event); font-weight: 700; }
+.k-points .box { color: var(--points); font-weight: 700; }
+.k-system .box { color: var(--muted); font-weight: 500; font-size: 0.9em; }
+.k-warn .box { color: var(--warn); font-weight: 700; }
+.k-error .box { color: var(--error); font-weight: 700; }
