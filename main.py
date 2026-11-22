@@ -1,4 +1,4 @@
-"""Live Chat Overlay. Double-click run.bat to start it (or run: pythonw main.py)."""
+"""Live Chat Overlay. Double-click start.bat to start it (or run: pythonw main.py)."""
 
 import sys
 

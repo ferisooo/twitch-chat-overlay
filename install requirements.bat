@@ -4,7 +4,7 @@ rem Gets Live Chat Overlay ready. Safe to run again: anything already installed 
 rem   Everyone needs PySide6 (it draws the overlay window).
 rem   TikTok chat also needs TikTokLive.
 rem Skip the question by passing twitch, tiktok or both as the first argument.
-rem "auto" (used by run.bat) installs PySide6 and asks nothing.
+rem "auto" (used by start.bat) installs PySide6 and asks nothing.
 cd /d "%~dp0."
 title Live Chat Overlay - setup
 
@@ -85,7 +85,7 @@ if errorlevel 1 goto :install_failed
 
 :done
 echo.
-echo All set. Double-click run.bat to start the overlay.
+echo All set. Double-click start.bat to start the overlay.
 echo.
 if /i "%~1"=="auto" exit /b 0
 pause

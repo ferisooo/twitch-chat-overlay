@@ -64,7 +64,7 @@ if "!STASHED!"=="1" (
     echo.
     echo The update worked, but your own edits clashed with it.
     echo They are saved in git stash under "update-bat".
-    if "!WAS_RUNNING!"=="1" if exist "run.bat" start "" "run.bat"
+    if "!WAS_RUNNING!"=="1" if exist "start.bat" start "" "start.bat"
     pause
     exit /b 1
   )
@@ -73,7 +73,7 @@ if "!STASHED!"=="1" (
 :updated
 echo.
 echo Updated to the newest version.
-if "!WAS_RUNNING!"=="1" if exist "run.bat" start "" "run.bat"
+if "!WAS_RUNNING!"=="1" if exist "start.bat" start "" "start.bat"
 timeout /t 3 >nul
 exit /b 0
 
@@ -98,6 +98,8 @@ set "DEST=%CD%"
 if "!DEST:~-1!"=="\" set "DEST=!DEST!."
 robocopy "!SRC!" "!DEST!" /E /R:2 /W:1 /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 goto :zip_copy_fail
+rem run.bat was merged into start.bat; remove the old copy.
+if exist "run.bat" del /q "run.bat"
 rd /s /q "%ZIP_DIR%" >nul 2>&1
 del /q "%ZIP_FILE%" >nul 2>&1
 goto :updated
@@ -119,7 +121,7 @@ goto :restore
 
 :restore
 if "!STASHED!"=="1" git stash pop
-if "!WAS_RUNNING!"=="1" if exist "run.bat" start "" "run.bat"
+if "!WAS_RUNNING!"=="1" if exist "start.bat" start "" "start.bat"
 
 :fail
 echo.
